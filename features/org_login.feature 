@@ -1,0 +1,6 @@
+ @selenium
+ Feature: Login - Org Admin
+   Scenario: Successful Login Org Admin
+     Given I am on login page org admin
+	 When I sign in org admin
+	 Then I am on the org admin site
