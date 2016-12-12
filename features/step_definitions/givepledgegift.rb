@@ -2,11 +2,11 @@ Given(/^I am on donor login page to give pledge gift$/) do
   visit $appHost + '/2001'
 end
 
-GiftDonorLogin = GlobalVars.new
+PledgeDonorLogin = GlobalVars.new
 
 When(/^I sign in as donor to give pledge gift$/) do
-  fill_in 'UserName', with: GiftDonorLogin.donor_login
-  fill_in 'Password', with: GiftDonorLogin.donor_password
+  fill_in 'UserName', with: PledgeDonorLogin.donor_login
+  fill_in 'Password', with: PledgeDonorLogin.donor_password
   click_button 'Login'
   sleep 2
 end
@@ -24,12 +24,12 @@ Then(/^I am taken to the funds list to add a pledge gift$/) do
 end
 
 When(/^I select a fund to create a pledge gift$/) do
-  find(:xpath, '//*[@id="giftsForm"]/div[9]/h5/select/option[2]').click
+  find(:xpath, '//*[@id="giftsForm"]/div[9]/h5/select/option[3]').click
   sleep 2
-  binding.pry
-  fill_in('InstallmentAmount', with: '2000')
+  fill_in('Total', with: '2000')
+  fill_in('InstallmentAmount', with: '20')
+  fill_in('NextContributionDate', with: '11/30/2017')
   select('Monthly', from: 'Frequency')
-  fill_in('StartDate', with: '11/30/2017')
   select('Court\'s Card - 1111', from: 'PaymentMethod')
 end
 
@@ -40,15 +40,14 @@ end
 
 When(/^I am taken to the Confirm Givings page for a pledge gift$/)do
   sleep 40
-  page.has_content?('I would like to give $2,000.00 Monthly. Please charge my Court\'s Card - 1111 starting on 11/30/2017.')
+  page.has_content?('I am pledging $2,000.00. It will begin on 11/30/2017 in the amount of $20.00 Monthly from my Court\'s Card - 1111 until fulfilled on 2/28/2026.')
   find('#giftsForm > div.text-right.clear-fix > button:nth-child(4)').click
   sleep 4
 end
 
 Then(/^The new pledge gift is saved and I am taken to the confirmation page$/)do
   sleep 40
-  page.should have_content('You are Offering $2,000.00 Monthly to Ashley\'s Test Fund. Your Court\'s Card - 1111 account will be charged starting on 11/30/17.')
-  page.has_content?('This is a test')
+  page.should have_content('You pledged to give a total of $2,000.00 to Test. Your Court\'s Card - 1111 account will be charged $20.00 Monthly starting on 11/30/17')
 end
 
 When(/^I select Finish for pledge gift$/)do

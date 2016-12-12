@@ -2,11 +2,11 @@ Given(/^I am on donor login page to give recurring gift$/) do
   visit $appHost + '/2001'
 end
 
-GiftDonorLogin = GlobalVars.new
+RecurringDonorLogin = GlobalVars.new
 
 When(/^I sign in as donor to give recurring gift$/) do
-  fill_in 'UserName', with: GiftDonorLogin.donor_login
-  fill_in 'Password', with: GiftDonorLogin.donor_password
+  fill_in 'UserName', with: RecurringDonorLogin.donor_login
+  fill_in 'Password', with: RecurringDonorLogin.donor_password
   click_button 'Login'
   sleep 2
 end
