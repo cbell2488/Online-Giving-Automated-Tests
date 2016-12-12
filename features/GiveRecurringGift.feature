@@ -4,7 +4,7 @@ Feature: Give Recurring Gift
     Given I am on donor login page to give recurring gift
     When I sign in as donor to give recurring gift
     Then I am on the donor landing page to give recurring gift
-    When I choose Give a New Gift to give a recurring gift
+    When I choose Give a New Gift to give recurring gift
     Then I am taken to the funds list to add a recurring gift
     When I select a fund to create a recurring gift
     Then Recurring Gift details are filled out

@@ -24,13 +24,12 @@ Then(/^I am taken to the funds list to add a recurring gift$/) do
 end
 
 When(/^I select a fund to create a recurring gift$/) do
-  binding.pry
-  find(:xpath, '//*[@id="giftsForm"]/div[4]/h5/select/option[3]').click
+  find(:xpath, '//*[@id="giftsForm"]/div[4]/h5/select/option[2]').click
   sleep 2
-  fill_in('OneTimeInstallmentAmount', with: '2000')
-  fill_in('OneTimeStartDate', with: '11/30/2017')
-  select('Court\'s Card - 1111', from: 'OneTimePaymentMethod')
-  fill_in('SpecialInstructions', with: 'This is intended for a Christmas offering.')
+  fill_in('InstallmentAmount', with: '2000')
+  select('Monthly', from: 'Frequency')
+  fill_in('StartDate', with: '11/30/2017')
+  select('Court\'s Card - 1111', from: 'PaymentMethod')
 end
 
 Then(/^Recurring Gift details are filled out$/) do
@@ -39,14 +38,15 @@ Then(/^Recurring Gift details are filled out$/) do
 end
 
 When(/^I am taken to the Confirm Givings page for a recurring gift$/)do
-  page.has_content?('I would like to make a One Time payment of $2,000.00. Please charge my Court\'s Card - 1111 on 11/30/2017.')
-  page.has_content?('This is a test')
+  sleep 40
+  page.has_content?('I would like to give $2,000.00 Monthly. Please charge my Court\'s Card - 1111 starting on 11/30/2017.')
   find('#giftsForm > div.text-right.clear-fix > button:nth-child(4)').click
   sleep 4
 end
 
 Then(/^The new recurring gift is saved and I am taken to the confirmation page$/)do
-  page.should have_content('You gave a One Time payment of $2,000.00 to Ashley\'s Test Fund. Your Court\'s Card - 1111 account will be charged on 11/30/17.')
+  sleep 40
+  page.should have_content('You are Offering $2,000.00 Monthly to Ashley\'s Test Fund. Your Court\'s Card - 1111 account will be charged starting on 11/30/17.')
   page.has_content?('This is a test')
 end
 
