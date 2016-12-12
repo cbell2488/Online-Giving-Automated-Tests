@@ -24,6 +24,7 @@ Then(/^I am taken to the funds list to add a recurring gift$/) do
 end
 
 When(/^I select a fund to create a recurring gift$/) do
+  binding.pry
   find(:xpath, '//*[@id="giftsForm"]/div[4]/h5/select/option[3]').click
   sleep 2
   fill_in('OneTimeInstallmentAmount', with: '2000')
